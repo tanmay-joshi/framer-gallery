@@ -201,16 +201,24 @@ for i in [0...5]
 		#print "ya"
 		dataTypeVariable = this.dataType
 		#print dataTypeVariable
-		for a in [0...cards.length]
-			print cards[a]
-			print o
-			o++
-			cards[a].destroy()
+		for a in [0...days.length]
+			days[a].destroy()
 			
-
-		cards = []
+		Xday = 0
+		days = []
+		
 		index = -1
-		for f in days
+		for a in [0...2]
+			newDay = new Day
+			newDay.DayName.text = daysData[a].name
+			newDay.y = Xday
+			
+		
+			newDay.name = daysData[a].name
+			#print "Y"
+			days.push(newDay)
+			length = galleryData.today.length
+			
 			if dataTypeVariable == "ALL"
 				for indx in [0...length]
 					columnIndex = indx % columnCount
@@ -220,26 +228,28 @@ for i in [0...5]
 						x: (columnIndex * cardWidth)
 						y: rowIndex * cardWidth
 						parent: newDay.DayContent
-						image: galleryData.today[indx].thumb
-					caard.identity.text = galleryData.today[indx].dataType
+						image: galleryData[daysData[a].name][indx].thumb
+					caard.identity.text = galleryData[daysData[a].name][indx].dataType
 					cards.push(caard)
-				reSize(newDay)
 			else
+				#print keys
 				for z in [0...galleryData.today.length]
 					if dataTypeVariable == galleryData.today[z].dataType
-						print "YES"
+						#print "YES"
 						index++
 						columnIndex = index % columnCount
 						rowIndex = Math.floor(index / columnCount)
 						
 						caard = new card
 							x: (columnIndex * cardWidth)
-							y: rowIndex * cardWidth
+							y: (rowIndex) * cardWidth
 							parent: newDay.DayContent
-							image: galleryData.today[z].thumb
-						caard.identity.text = galleryData.today[z].dataType
+							image: galleryData[daysData[a].name][z].thumb
+						caard.identity.text = galleryData[daysData[a].name][z].dataType
 						cards.push(caard)
-				reSize(newDay)
+			reSize(newDay)
+			Xday += newDay.height
+			index = -1
 
 
 
