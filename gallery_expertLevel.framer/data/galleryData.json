@@ -1,5 +1,5 @@
 {
-    "today": [
+    "Today": [
         {
             "thumb":"images/All/01.jpg",
             "dataType":"I"
@@ -39,7 +39,7 @@
         
     ],
 
-    "yesterday": [
+    "Yesterday": [
         {
             "thumb":"images/All/05.jpg",
             "dataType":"I"
@@ -82,7 +82,7 @@
         },
         {
             "thumb":"images/All/18.jpg",
-            "dataType":"A"
+            "dataType":"G"
         }
         
     ]
