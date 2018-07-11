@@ -39,7 +39,7 @@ class Filters extends Layer
 #parent Scroll
 scroll = new ScrollComponent
 	size: Screen.size
-	horizontalScroll: false
+	scrollHorizontal: false
 
 
 # Card Component
