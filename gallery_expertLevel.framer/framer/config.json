@@ -9,15 +9,18 @@
   "deviceType" : "samsung-galaxy-note-5-black",
   "sharedPrototype" : 0,
   "propertyPanelToggleStates" : {
-    "Filters" : false
+
   },
+<<<<<<< HEAD
   "projectId" : "7FCDF1F8-AFC8-461D-A4C2-10B0E85EDF61",
+=======
+  "projectId" : "20A120B3-ED79-4AE6-96D2-74B29B23BBD0",
+>>>>>>> 78ee3a79247b769369a4de64cb72bbe7f4306927
   "deviceOrientation" : 0,
   "selectedHand" : "",
   "showBezel" : 0,
   "foldedCodeRanges" : [
     "{0, 103}",
-    "{104, 77}",
     "{182, 790}"
   ],
   "deviceScale" : "fit"

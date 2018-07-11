@@ -36,6 +36,11 @@ class Filters extends Layer
 		@FilterName.x = Align.center
 		@FilterName.y = Align.bottom(8)
 
+#parent Scroll
+#scroll = new ScrollComponent
+	#size: Screen.size
+
+
 # Card Component
 class card extends Layer
 	constructor: (@options={}) ->
@@ -157,68 +162,85 @@ cards = []
 
 daysData = [
 	{
-		"name": "today", "id": "day1"
+		"name": Object.keys(galleryData)[0], "id": "day1"
 	},
 	{
-		"name": "yesterday", "id": "day2"
+		"name": Object.keys(galleryData)[1], "id": "day2"
 	}
 ]
 
-days = [{},{}]
+days = []
 
-height = -400
-#day1
-for d in days
-	height = height + days[0].y
-	
-	days[d] = new Day
-	days[d].DayName.text = daysData[0].name
-	days[d].y = height
-	length = galleryData.today.length
+YDay = 0
+
+for a in [0...2]
+	newDay = new Day
+	newDay.DayName.text = daysData[a].name
+	newDay.y = YDay
 	
 
+	newDay.name = daysData[a].name
+	#print "Y"
+	days.push(newDay)
+	length = galleryData[daysData[a].name].length
+	
 	for index in [0...length]
-		columnIndex = index % columnCount
-		rowIndex = Math.floor(index / columnCount)
-	
-		caard = new card
-			x: (columnIndex * cardWidth)
-			y: rowIndex * cardWidth
-			parent: days[d].DayContent
-			image: galleryData.today[index].thumb
-		caard.identity.text = galleryData.today[index].dataType
-		cards.push(caard)
-	
-	reSize(days[d])
-	
-	dataTypeVariable = ""
-	
-	
-	for i in [0...5]
-		BottomTabs[i].onClick ->
-			dataTypeVariable = this.dataType
-			#print dataTypeVariable
-			for a in [0...cards.length]
-				cards[a].destroy()
-	
-			cards = []
-			index = -1
+			columnIndex = index % columnCount
+			rowIndex = Math.floor(index / columnCount)
+		
+			caard = new card
+				x: (columnIndex * cardWidth)
+				y: rowIndex * cardWidth
+				parent: newDay.DayContent
+				image: galleryData[daysData[a].name][index].thumb
+			caard.identity.text = galleryData[daysData[a].name][index].dataType
+			cards.push(caard)
+		
+		reSize(newDay)
+		YDay += newDay.height
+		dataTypeVariable = ""
+
+o = 0
+
+for i in [0...5]
+	BottomTabs[i].onClick ->
+		#print "ya"
+		dataTypeVariable = this.dataType
+		#print dataTypeVariable
+		for a in [0...days.length]
+			days[a].destroy()
+			
+		Xday = 0
+		days = []
+		
+		index = -1
+		for a in [0...2]
+			newDay = new Day
+			newDay.DayName.text = daysData[a].name
+			newDay.y = Xday
+			
+		
+			newDay.name = daysData[a].name
+			#print "Y"
+			days.push(newDay)
+			length = galleryData[daysData[a].name].length
+			
 			if dataTypeVariable == "ALL"
-				for index in [0...length]
-					columnIndex = index % columnCount
-					rowIndex = Math.floor(index / columnCount)
+				for indx in [0...length]
+					columnIndex = indx % columnCount
+					rowIndex = Math.floor(indx / columnCount)
 				
 					caard = new card
 						x: (columnIndex * cardWidth)
 						y: rowIndex * cardWidth
-						parent: days[d].DayContent
-						image: galleryData.today[index].thumb
-					caard.identity.text = galleryData.today[index].dataType
+						parent: newDay.DayContent
+						image: galleryData[daysData[a].name][indx].thumb
+					caard.identity.text = galleryData[daysData[a].name][indx].dataType
 					cards.push(caard)
-				reSize(days[d])
 			else
-				for z in [0...galleryData.today.length]
-					if dataTypeVariable == galleryData.today[z].dataType
+				#print keys
+				for z in [0...galleryData[daysData[a].name].length]
+					if dataTypeVariable == galleryData[daysData[a].name][z].dataType
 						#print "YES"
 						index++
 						columnIndex = index % columnCount
@@ -226,20 +248,14 @@ for d in days
 						
 						caard = new card
 							x: (columnIndex * cardWidth)
-							y: rowIndex * cardWidth
-							parent: days[d].DayContent
-							image: galleryData.today[z].thumb
-						caard.identity.text = galleryData.today[z].dataType
+							y: (rowIndex) * cardWidth
+							parent: newDay.DayContent
+							image: galleryData[daysData[a].name][z].thumb
+						caard.identity.text = galleryData[daysData[a].name][z].dataType
 						cards.push(caard)
-				reSize(days[d])
-
-
-
-
-
-
-
-
+			reSize(newDay)
+			Xday += newDay.height
+			index = -1
 
 
 
