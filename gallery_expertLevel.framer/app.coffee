@@ -164,8 +164,88 @@ daysData = [
 	}
 ]
 
-days = [{},{}]
+days = []
 
+YDay = 0
+
+for a in [0...2]
+	newDay = new Day
+	newDay.DayName.text = daysData[a].name
+	newDay.y = YDay
+
+	newDay.name = daysData[a].name
+	#print "Y"
+	days.push(newDay)
+	length = galleryData.today.length
+	
+	for index in [0...length]
+			columnIndex = index % columnCount
+			rowIndex = Math.floor(index / columnCount)
+		
+			caard = new card
+				x: (columnIndex * cardWidth)
+				y: rowIndex * cardWidth
+				parent: newDay.DayContent
+				image: galleryData.today[index].thumb
+			caard.identity.text = galleryData.today[index].dataType
+			cards.push(caard)
+		
+		reSize(newDay)
+		YDay += newDay.height
+		dataTypeVariable = ""
+
+o = 0
+
+for i in [0...5]
+	BottomTabs[i].onClick ->
+		#print "ya"
+		dataTypeVariable = this.dataType
+		#print dataTypeVariable
+		for a in [0...cards.length]
+			print cards[a]
+			print o
+			o++
+			cards[a].destroy()
+			
+
+		cards = []
+		index = -1
+		for f in days
+			if dataTypeVariable == "ALL"
+				for indx in [0...length]
+					columnIndex = indx % columnCount
+					rowIndex = Math.floor(indx / columnCount)
+				
+					caard = new card
+						x: (columnIndex * cardWidth)
+						y: rowIndex * cardWidth
+						parent: newDay.DayContent
+						image: galleryData.today[indx].thumb
+					caard.identity.text = galleryData.today[indx].dataType
+					cards.push(caard)
+				reSize(newDay)
+			else
+				for z in [0...galleryData.today.length]
+					if dataTypeVariable == galleryData.today[z].dataType
+						print "YES"
+						index++
+						columnIndex = index % columnCount
+						rowIndex = Math.floor(index / columnCount)
+						
+						caard = new card
+							x: (columnIndex * cardWidth)
+							y: rowIndex * cardWidth
+							parent: newDay.DayContent
+							image: galleryData.today[z].thumb
+						caard.identity.text = galleryData.today[z].dataType
+						cards.push(caard)
+				reSize(newDay)
+
+
+
+
+
+###
 height = -400
 #day1
 for d in days
@@ -232,8 +312,7 @@ for d in days
 						caard.identity.text = galleryData.today[z].dataType
 						cards.push(caard)
 				reSize(days[d])
-
-
+###
 
 
 
