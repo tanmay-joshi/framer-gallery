@@ -37,8 +37,9 @@ class Filters extends Layer
 		@FilterName.y = Align.bottom(8)
 
 #parent Scroll
-#scroll = new ScrollComponent
-	#size: Screen.size
+scroll = new ScrollComponent
+	size: Screen.size
+	horizontalScroll: false
 
 
 # Card Component
@@ -177,6 +178,7 @@ for a in [0...2]
 	newDay = new Day
 	newDay.DayName.text = daysData[a].name
 	newDay.y = YDay
+	newDay.parent = scroll.content
 	
 
 	newDay.name = daysData[a].name
@@ -218,6 +220,7 @@ for i in [0...5]
 			newDay = new Day
 			newDay.DayName.text = daysData[a].name
 			newDay.y = Xday
+			newDay.parent = scroll.content
 			
 		
 			newDay.name = daysData[a].name
